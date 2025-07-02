@@ -83,3 +83,9 @@ form button{
     border-radius: 10px ;
 
 }
+footer{
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    justify-content: baseline;
+}
