@@ -1,12 +1,15 @@
 const express = require("express");
 const path =require('path');
+const cookieParser = require('cookie-parser')
 const {connectToMonogoDB} = require('./connect');
+const {restrictToLoggedinUserOnly} = require('./middlewares/auth')
 
 const URL = require('./models/url');
 
 const urlRoute= require('./routes/url');
 const staticRoute = require('./routes/staticRouter');
 const UserRoute = require('./routes/user');
+
 
 const app = express();
 const PORT =8001;
@@ -18,11 +21,12 @@ app.set("view engine" , "ejs");
 app.set('views',path.resolve('./views') )
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({extended : false}));  
 
 
 
-app.use('/url', urlRoute);
+app.use('/url',restrictToLoggedinUserOnly, urlRoute);
 app.use('/user', UserRoute );
 app.use('/', staticRoute)
 
