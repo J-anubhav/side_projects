@@ -1,9 +1,13 @@
 const express = require("express");
 const path =require('path');
-const urlRoute= require('./routes/url');
 const {connectToMonogoDB} = require('./connect');
+
 const URL = require('./models/url');
-const staticRoute = require('./routes/staticRouter')
+
+const urlRoute= require('./routes/url');
+const staticRoute = require('./routes/staticRouter');
+const UserRoute = require('./routes/user');
+
 const app = express();
 const PORT =8001;
 
@@ -19,6 +23,7 @@ app.use(express.urlencoded({extended : false}));
 
 
 app.use('/url', urlRoute);
+app.use('/user', UserRoute );
 app.use('/', staticRoute)
 
 app.get('/url/:shortId' , async(req,res) =>{

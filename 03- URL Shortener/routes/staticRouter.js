@@ -10,4 +10,8 @@ router.get('/' , async(req,res) =>{
     });
 });
 
+router.get('/Signup', (req, res)=>{
+    return res.render('Signup');
+})
+
 module.exports = router;
